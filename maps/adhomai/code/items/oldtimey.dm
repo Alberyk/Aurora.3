@@ -248,3 +248,12 @@
 	icon_state = "hedget"
 	item_state = "hedget"
 	contained_sprite = 1
+
+/obj/structure/ore_box/adhomai
+	name = "minecart"
+	desc = "An old minecart. Smells like wood and dust."
+	icon = 'icons/adhomai/items.dmi'
+	icon_state = "minecart"
+
+/obj/structure/ore_box/adhomai/Move(var/turf/destination)
+	return ((locate(/obj/structure/track) in destination)) ? ..() : FALSE
