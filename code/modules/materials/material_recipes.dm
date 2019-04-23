@@ -47,6 +47,7 @@
 		new/datum/stack_recipe("green comfy chair", /obj/structure/bed/chair/comfy/green, 2, one_per_turf = 1, on_floor = 1), \
 		))
 
+	recipes += new/datum/stack_recipe("anvil", /obj/structure/anvil, 25, time = 40, one_per_turf = 1, on_floor = 1)
 	recipes += new/datum/stack_recipe("key", /obj/item/weapon/key, 1, time = 10, one_per_turf = 0, on_floor = 1)
 	recipes += new/datum/stack_recipe("table frame", /obj/structure/table, 1, time = 10, one_per_turf = 1, on_floor = 1)
 	recipes += new/datum/stack_recipe("custodial cart", /obj/structure/janitorialcart, 15, time = 120, one_per_turf = 1, on_floor = 1)
@@ -190,5 +191,5 @@
 
 /material/iron/generate_recipes()
 	..()
-	recipes += new/datum/stack_recipe("cooking pot", /obj/item/weapon/reagent_containers/cooking_container/fire/pot, 3)
-	recipes += new/datum/stack_recipe("stove", /obj/structure/bonfire/fireplace/stove, 20, time = 25, one_per_turf = 1, on_floor = 1)
+	recipes += new/datum/stack_recipe("smelter", /obj/structure/smelter, 40, time = 60, one_per_turf = 1, on_floor = 1)
+	recipes += new/datum/stack_recipe("stove", /obj/structure/bonfire/fireplace/stove, 10, time = 25, one_per_turf = 1, on_floor = 1)

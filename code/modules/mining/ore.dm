@@ -6,6 +6,7 @@
 	throwforce = 10
 	var/datum/geosample/geologic_data
 	var/material
+	var/amount = 1
 
 /obj/item/weapon/ore/uranium
 	name = "pitchblende"

@@ -143,4 +143,44 @@
 	icon_state = "urn_mold"
 	outcome = /obj/item/weapon/storage/box/burialurn
 	needed_ammount = 3
-	use_material = FALSE
+
+/obj/item/mold/tools/screwdriver
+	name = "screwdriver mold"
+	outcome = /obj/item/weapon/screwdriver
+	needed_ammount = 1
+	allowed_materials = list("iron", DEFAULT_WALL_MATERIAL, "plasteel")
+
+/obj/item/mold/tools/crowbar
+	name = "crowbar mold"
+	outcome = /obj/item/weapon/crowbar
+
+/obj/item/mold/tools/wrench
+	name = "wrench mold"
+	outcome = /obj/item/weapon/wrench
+
+/obj/item/mold/ingot
+	name = "ingot mold"
+	outcome = null
+	needed_ammount = 1
+	allowed_materials = null
+
+/obj/item/mold/ingot/create_result(var/turf/T)
+	if(filling == "iron")
+		new /obj/item/stack/material/iron(T)
+		return
+
+	if(filling == "gold")
+		new /obj/item/stack/material/gold(T)
+		return
+
+	if(filling == "silver")
+		new /obj/item/stack/material/silver(T)
+		return
+
+	if(filling == "platinum")
+		new /obj/item/stack/material/osmium(T)
+		return
+
+	else
+		new /obj/item/weapon/ore/slag(T)
+		return
