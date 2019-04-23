@@ -108,7 +108,7 @@
 		to_chat(user, "<span class='notice'>You add \the [I] to \the [src].</span>")
 		smelting = TRUE
 		update_flame()
-		addtimer(CALLBACK(src, .proc/smelt, current_mold, I.material), 3 MINUTES)
+		addtimer(CALLBACK(src, .proc/smelt, current_mold, I.material), 1 MINUTES)
 		qdel(W)
 
 /obj/structure/smelter/proc/smelt(var/obj/item/mold/target_mold, var/target_material)
