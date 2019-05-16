@@ -88,8 +88,8 @@
 		if (user.stat || user.restrained()) return
 		if (src.reload < 180) return
 		if ((user.contents.Find(src) || (in_range(src, user) && istype(src.loc, /turf))) || (istype(user, /mob/living/silicon)))
-			command_announcement.Announce("A artillery fire detected. Brace for impact.", "SAMV Halberd System Report")
-			to_world(sound('sound/effects/yamato_fire.ogg'))
+			command_announcement.Announce("Mounted coilgun cannon is opening fire, all hands to their positions.", "SAMV Halberd System Report")
+			to_world(sound('sound/effects/naval_coilgun.ogg'))
 			message_admins("[key_name_admin(usr)] has launched an artillery strike.", 1)
 			explosion(t,2,5,11)
 			reload = 0
