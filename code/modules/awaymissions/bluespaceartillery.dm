@@ -61,3 +61,35 @@
 
 /obj/structure/artilleryplaceholder/decorative
 	density = 0
+
+/obj/machinery/computer/artillerycontrol/sol
+	name = "artillery control"
+	icon_state = "control_boxp1"
+	icon = 'icons/obj/machines/particle_accelerator2.dmi'
+	density = 1
+	anchored = 1
+
+/obj/machinery/computer/artillerycontrol/sol/attack_hand(mob/user as mob)
+	user.set_machine(src)
+	var/dat = "<B>Artillery Control:</B><BR>"
+	dat += "Locked on<BR>"
+	dat += "<B>Charge progress: [reload]/180:</B><BR>"
+	dat += "<A href='byond://?src=\ref[src];fireArea=1'>Open Fire - Area</A><BR>"
+	dat += "<A href='byond://?src=\ref[src];fireCords=1'>Open Fire - Coordinates</A><BR>"
+	dat += "Deployment of weapon authorized by <br>The Sol Alliance Admiralty<br><br>Remember, friendly fire is grounds for termination of your contract and life.<HR>"
+	user << browse(dat, "window=scroll")
+	onclose(user, "scroll")
+	return
+
+/obj/machinery/computer/artillerycontrol/sol/announce_and_fire(var/turf/t, var/mob/user)
+	if(!istype(t))
+		return
+	if ((user.contents.Find(src) || (in_range(src, user) && istype(src.loc, /turf))) || (istype(user, /mob/living/silicon)))
+		if (user.stat || user.restrained()) return
+		if (src.reload < 180) return
+		if ((user.contents.Find(src) || (in_range(src, user) && istype(src.loc, /turf))) || (istype(user, /mob/living/silicon)))
+			command_announcement.Announce("A artillery fire detected. Brace for impact.", "SAMV Halberd System Report")
+			to_world(sound('sound/effects/yamato_fire.ogg'))
+			message_admins("[key_name_admin(usr)] has launched an artillery strike.", 1)
+			explosion(t,2,5,11)
+			reload = 0
