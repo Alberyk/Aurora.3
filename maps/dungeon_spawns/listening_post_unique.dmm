@@ -94,9 +94,6 @@
 	dir = 1
 	},
 /obj/machinery/door/window/westleft,
-/obj/item/clothing/suit/space/void/merc,
-/obj/item/clothing/shoes/magboots,
-/obj/item/clothing/head/helmet/space/void/merc,
 /turf/simulated/floor/tiled/dark,
 /area/dungeon/syndie_listening_post)
 "an" = (
@@ -158,9 +155,6 @@
 	dir = 4
 	},
 /obj/machinery/door/window/westleft,
-/obj/item/clothing/suit/space/void/merc,
-/obj/item/clothing/shoes/magboots,
-/obj/item/clothing/head/helmet/space/void/merc,
 /turf/simulated/floor/tiled/dark,
 /area/dungeon/syndie_listening_post)
 "aw" = (
@@ -263,12 +257,6 @@
 /obj/structure/table/reinforced,
 /obj/effect/decal/cleanable/cobweb2{
 	icon_state = "cobweb1"
-	},
-/obj/structure/closet/crate/secure/gear{
-	req_access = list(150)
-	},
-/obj/item/rig/merc/empty{
-	req_access = null
 	},
 /turf/simulated/floor/tiled/dark,
 /area/dungeon/syndie_listening_post)
@@ -548,14 +536,10 @@
 /area/dungeon/syndie_listening_post)
 "by" = (
 /obj/structure/bed/chair/office/bridge/generic,
-/mob/living/simple_animal/hostile/syndicate/ranged{
-	corpse = /obj/effect/landmark/mobcorpse/syndicatesoldier/unknown;
+/mob/living/simple_animal/hostile/syndicate/ranged/space{
 	desc = "They appear starved and demented from their long time of isolation.";
 	destroy_surroundings = 0;
-	health = 50;
-	maxHealth = 50;
-	name = "\improper forgotten operative";
-	wander = 0
+	name = "\improper forgotten operative"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/dungeon/syndie_listening_post)
@@ -564,11 +548,15 @@
 /turf/simulated/floor/tiled/dark,
 /area/dungeon/syndie_listening_post)
 "bA" = (
-/obj/random/highvalue,
 /obj/structure/closet/crate/secure/gear{
 	req_access = list(150)
 	},
+/obj/item/gun/projectile/pistol,
 /turf/simulated/floor/shuttle/dark_red,
+/area/dungeon/syndie_listening_post)
+"BT" = (
+/obj/random/rig_module,
+/turf/simulated/floor/tiled/dark,
 /area/dungeon/syndie_listening_post)
 
 (1,1,1) = {"
@@ -1205,7 +1193,7 @@ aX
 bx
 bl
 bz
-aI
+BT
 ab
 ab
 ad
