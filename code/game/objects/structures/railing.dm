@@ -209,7 +209,11 @@
 						G.affecting.Weaken(5)
 					G.affecting.apply_damage(15, BRUTE, BP_HEAD)
 				else
-					G.affecting.forceMove(get_step(src, get_dir(user, src)))
+					var/turf/destination = get_step(src, get_dir(user, src))
+					if(destination.contains_dense_objects())
+						G.affecting.forceMove(get_turf(src))
+					else
+						G.affecting.forceMove(destination)
 					G.affecting.Weaken(5)
 					visible_message(SPAN_WARNING("[G.assailant] throws \the [G.affecting] over \the [src]!"))
 				qdel(G)
@@ -295,6 +299,8 @@
 	user.visible_message(SPAN_WARNING("\The [user] starts climbing over \the [src]!"))
 	LAZYADD(climbers, user)
 
+	var/turf/destination = get_step(src, get_dir(user, src))
+
 	if(!do_after(user, 50))
 		LAZYREMOVE(climbers, user)
 		return
@@ -303,7 +309,10 @@
 		LAZYREMOVE(climbers, user)
 		return
 
-	user.forceMove(get_step(src, climb_dir))
+	if(destination.contains_dense_objects())
+		user.forceMove(get_turf(src))
+	else
+		user.forceMove(destination)
 	user.visible_message(SPAN_WARNING("\The [user] climbs over \the [src]!"))
 	LAZYREMOVE(climbers, user)
 
