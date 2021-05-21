@@ -210,7 +210,7 @@
 					G.affecting.apply_damage(15, BRUTE, BP_HEAD)
 				else
 					var/turf/destination = get_step(src, get_dir(user, src))
-					if(destination.contains_dense_objects())
+					if(check_if_can_move(destination))
 						G.affecting.forceMove(get_turf(src))
 					else
 						G.affecting.forceMove(destination)
@@ -285,9 +285,11 @@
 /obj/structure/railing/can_climb(var/mob/living/user, climb_dir, post_climb_check=0)
 	. = ..()
 	if(. && get_turf(user) == get_turf(src))
-		if(turf_is_crowded(TRUE) || !user.Adjacent(get_step(src, climb_dir)))
+		var/turf/destination = get_step(src, climb_dir)
+		if(turf_is_crowded(TRUE) || !user.Adjacent(destination) || check_if_can_move(destination))
 			to_chat(user, SPAN_DANGER("You can't climb there, the way is blocked."))
 			return FALSE
+
 
 /obj/structure/railing/do_climb(mob/living/user)
 	var/climb_dir = get_dir(user, src)
@@ -309,12 +311,18 @@
 		LAZYREMOVE(climbers, user)
 		return
 
-	if(destination.contains_dense_objects())
-		user.forceMove(get_turf(src))
-	else
-		user.forceMove(destination)
+	user.forceMove(destination)
 	user.visible_message(SPAN_WARNING("\The [user] climbs over \the [src]!"))
 	LAZYREMOVE(climbers, user)
 
 	if(!anchored || material.is_brittle())
 		take_damage(maxhealth) // Fatboy
+
+/obj/structure/railing/proc/check_if_can_move(var/turf/destination) //this check for solid stuff that is not another railing
+	if(destination.density)
+		return FALSE
+	for(var/atom/A in destination)
+		if(!istype(A, /obj/structure/railing))
+			if(A.density && !(A.flags & ON_BORDER))
+				return FALSE
+	return TRUE
